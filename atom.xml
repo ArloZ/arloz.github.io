@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Arloz Blog</title>
+  <subtitle>Arloz Blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://arloz.github.io/"/>
+  <updated>2016-03-08T14:13:27.000Z</updated>
+  <id>http://arloz.github.io/</id>
+  
+  <author>
+    <name>Arloz</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用 Hexo 轻松搭建博客</title>
+    <link href="http://arloz.github.io/2016/03/07/hexo-setup/"/>
+    <id>http://arloz.github.io/2016/03/07/hexo-setup/</id>
+    <published>2016-03-07T15:23:34.000Z</published>
+    <updated>2016-03-08T14:13:27.000Z</updated>
+    
+    <content type="html">&lt;p&gt;一直希望能够用MarkDown方便的写博客，工具用得爽了，写起来心情也会更好。&lt;/p&gt;
+&lt;p&gt;之前使用&lt;code&gt;jekyll&lt;/code&gt;搭建静态博客并在github上托管，但是由于使用&lt;code&gt;jekyll&lt;/code&gt;的配置比较多且杂，而且对MarkDown的支持其实并不是很好，对代码块需要使用特有的标签，因此尝试使用&lt;code&gt;Hexo&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Hexo&lt;/code&gt;是一个基于node的静态博客框架，&lt;a href=&quot;https://hexo.io/zh-cn/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;详细文档&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Step-1-安装-amp-启动&quot;&gt;&lt;a href=&quot;#Step-1-安装-amp-启动&quot; class=&quot;headerlink&quot; title=&quot;Step 1 安装&amp;amp;启动&quot;&gt;&lt;/a&gt;Step 1 安装&amp;amp;启动&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;安装&lt;code&gt;node&lt;/code&gt;/&lt;code&gt;git&lt;/code&gt;请自行google&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;国内node的npm访问速度很慢，可以使用淘宝的node npm镜像：&lt;a href=&quot;http://npm.taobao.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://npm.taobao.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装&lt;code&gt;hexo&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ npm install -g hexo-cli&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用&lt;code&gt;hexo&lt;/code&gt;新建一个blog&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo init demo&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;本地启动&lt;code&gt;hexo&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;执行命令之后，即可通过浏览器访问本地的静态博客了，默认地址是：&lt;a href=&quot;http://localhost:4000&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:4000&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Step-3-一些基本的配置&quot;&gt;&lt;a href=&quot;#Step-3-一些基本的配置&quot; class=&quot;headerlink&quot; title=&quot;Step 3 一些基本的配置&quot;&gt;&lt;/a&gt;Step 3 一些基本的配置&lt;/h3&gt;&lt;p&gt;&lt;code&gt;hexo&lt;/code&gt;的配置项均在&lt;code&gt;_config.yml&lt;/code&gt;文件中管理，可以配置站点的基本信息、站点主题样式、网址、目录等等内容，详细的配置可参见：&lt;a href=&quot;https://hexo.io/zh-cn/docs/configuration.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/zh-cn/docs/configuration.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Hexo&lt;/code&gt;提供了多种博客主题，可以进行自由的挑选：&lt;a href=&quot;https://hexo.io/themes/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/themes/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Step-2-部署到github-pages&quot;&gt;&lt;a href=&quot;#Step-2-部署到github-pages&quot; class=&quot;headerlink&quot; title=&quot;Step 2 部署到github pages&quot;&gt;&lt;/a&gt;Step 2 部署到github pages&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Github pages&lt;/code&gt;可以用来托管静态网站，详细介绍：&lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://pages.github.com/&lt;/a&gt;，如果要想将&lt;code&gt;Hexo&lt;/code&gt;框架创建的静态网站托管在&lt;code&gt;Github pages&lt;/code&gt;上，我们需要做以下的两个事情。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在Github上创建一个&lt;code&gt;Github pages&lt;/code&gt;的代码仓库，仓库的名称为&lt;code&gt;username.github.io&lt;/code&gt;，访问&lt;code&gt;http://username.github.io&lt;/code&gt;这个地址的时候就可以直接访问托管在&lt;code&gt;Github pages&lt;/code&gt;上的静态网站。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装hexo插件，用于将静态网站部署到&lt;code&gt;Github pages&lt;/code&gt;上&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ npm install hexo-deployer-git --save&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置&lt;code&gt;hexo git&lt;/code&gt;插件信息，在&lt;code&gt;_config.xml&lt;/code&gt;文件中配置如下内容&lt;/p&gt;
+&lt;figure class=&quot;highlight yaml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;deploy:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;    type:&lt;/span&gt; git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;    repo:&lt;/span&gt; git@github.com:username/username.github.io.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置好之后使用下面的命令就可以将博客部署到&lt;code&gt;Github pages&lt;/code&gt;上面了&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy -g&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;使用hexo框架搭建个人博客就OK了，开始享受轻松写博客吧！&quot;&gt;&lt;a href=&quot;#使用hexo框架搭建个人博客就OK了，开始享受轻松写博客吧！&quot; class=&quot;headerlink&quot; title=&quot;使用hexo框架搭建个人博客就OK了，开始享受轻松写博客吧！&quot;&gt;&lt;/a&gt;使用hexo框架搭建个人博客就OK了，开始享受轻松写博客吧！&lt;/h5&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直希望能够用MarkDown方便的写博客，工具用得爽了，写起来心情也会更好。&lt;/p&gt;
+&lt;p&gt;之前使用&lt;code&gt;jekyll&lt;/code&gt;搭建静态博客并在github上托管，但是由于使用&lt;code&gt;jekyll&lt;/code&gt;的配置比较多且杂，而且对MarkDown的支持其
+    
+    </summary>
+    
+      <category term="杂七杂八" scheme="http://arloz.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+    
+    
+      <category term="config, blog, tool" scheme="http://arloz.github.io/tags/config-blog-tool/"/>
+    
+  </entry>
+  
+</feed>
