@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en_US"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Mac开发环境配置 · Arloz Blog</title><meta name="description" content="Mac开发环境配置 - Arloz"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/Arloz" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Mac开发环境配置</h1><div class="post-time">Sep 8, 2015</div><div class="post-content"><p>主要用于记录一些MAC上的个人的开发环境及工具的配置，留着以后备用,避免每次都去google.</p>
+<h3 id="编辑器-Sublime-Text-3"><a href="#编辑器-Sublime-Text-3" class="headerlink" title="编辑器-Sublime Text 3"></a>编辑器-Sublime Text 3</h3><h4 id="个人的一些默认配置"><a href="#个人的一些默认配置" class="headerlink" title="个人的一些默认配置"></a>个人的一些默认配置</h4><ul>
+<li>通过cmd+,打开配置文件，配置内容如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 使光标闪动更加柔和</span><br><span class="line">&quot;caret_style&quot;: &quot;phase&quot;,</span><br><span class="line"></span><br><span class="line">// 高亮当前行</span><br><span class="line">&quot;highlight_line&quot;: true,</span><br><span class="line"></span><br><span class="line">// 高亮有修改的标签</span><br><span class="line">&quot;highlight_modified_tabs&quot;: true,</span><br><span class="line"></span><br><span class="line">// The number of spaces a tab is considered equal to</span><br><span class="line">&quot;tab_size&quot;: 4,</span><br><span class="line"></span><br><span class="line">// Set to true to insert spaces when tab is pressed</span><br><span class="line">&quot;translate_tabs_to_spaces&quot;: true,</span><br></pre></td></tr></table></figure>
+<h4 id="安装Sublime-Text的包管理器"><a href="#安装Sublime-Text的包管理器" class="headerlink" title="安装Sublime Text的包管理器"></a>安装Sublime Text的包管理器</h4><ul>
+<li><a href="https://packagecontrol.io/installation" target="_blank" rel="external">https://packagecontrol.io/installation</a></li>
+</ul>
+<h4 id="配置MarkDown编辑环境"><a href="#配置MarkDown编辑环境" class="headerlink" title="配置MarkDown编辑环境"></a>配置MarkDown编辑环境</h4><ul>
+<li>配置MarkDown高亮<ul>
+<li>安装<code>Monokai Extended</code>主题:<code>cmd+shift+p</code>呼出提示命令，安装之</li>
+<li>选择应用<code>Monokai Extended</code>主题：<code>Preference-&gt;Color Scheme-&gt;Monokai Extended</code></li>
+</ul>
+</li>
+<li>配置Markdown Preview<ul>
+<li>安装<code>Markdown Preview</code>插件：<code>cmd+shift+p</code>呼出提示命令，安装之mark</li>
+</ul>
+</li>
+<li><p>设置 MarkDown预览快捷键</p>
+<ul>
+<li>选择Preference-&gt;Key Binding-User</li>
+<li><p>输入如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123; &quot;keys&quot;: [&quot;shift+super+m&quot;], &quot;command&quot;: &quot;markdown_preview&quot;, &quot;args&quot;: &#123; &quot;target&quot;: &quot;browser&quot;&#125; &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="SFTP插件"><a href="#SFTP插件" class="headerlink" title="SFTP插件"></a>SFTP插件</h4><p>通过该插件可以很方便的将文件上传到服务上，免除了不停scp的痛苦</p>
+<p>安装插件</p>
+<ul>
+<li><code>cmd+shift+p</code>呼出提示命令，输入<code>install package</code>,然后搜索”sftp“即可</li>
+<li>安装完成后会打开配置文件，在其中配置需要同步上传文件的服务器地址、目标路径、用户名密码等</li>
+</ul>
+<p>GBK编码显示</p>
+<ul>
+<li>插件安装时搜索<code>ConvertToUTF8</code></li>
+<li>Sublime3有可能会遇到解码错误，此时需要安装<code>Codecs33</code></li>
+</ul>
+<h4 id="Git插件"><a href="#Git插件" class="headerlink" title="Git插件"></a>Git插件</h4><p>通过该插件可以在Sublime中直接使用git命令</p>
+<p>安装插件</p>
+<ul>
+<li>搜索安装GIT插件，此插件将git集成到了Sublime中</li>
+<li><code>cmd+shift+p</code>呼出Sublime的命令行，然后输入GIT则可以看到能使用git命令了</li>
+<li><code>GIT:add</code>:添加要提交的文件，<code>GIT：commit</code>:输入提交注释后关闭窗口即可自动提交……</li>
+</ul>
+<h4 id="侧边栏管理文件"><a href="#侧边栏管理文件" class="headerlink" title="侧边栏管理文件"></a>侧边栏管理文件</h4><p>通过该插件可以直接对文件进行拖动、在finder打开等操作</p>
+<ul>
+<li>通过control package安装即可，<a href="https://github.com/titoBouzout/SideBarEnhancements" target="_blank" rel="external">SideBarEnhancements</a></li>
+</ul>
+<h4 id="HTML插件Emmet"><a href="#HTML插件Emmet" class="headerlink" title="HTML插件Emmet"></a>HTML插件Emmet</h4><ul>
+<li>可以用来快速的补全html，参考文档 <a href="http://emmet.io/" target="_blank" rel="external">http://emmet.io/</a></li>
+</ul>
+<h2 id="Intellij-IDEA配置"><a href="#Intellij-IDEA配置" class="headerlink" title="Intellij IDEA配置"></a>Intellij IDEA配置</h2><h4 id="配置新建文件的文件头及类描述"><a href="#配置新建文件的文件头及类描述" class="headerlink" title="配置新建文件的文件头及类描述"></a>配置新建文件的文件头及类描述</h4><ul>
+<li><code>CMD+,</code>-&gt;<code>File and Code Templates</code>设置includes和Templates</li>
+</ul>
+<h4 id="添加getter、setter注释"><a href="#添加getter、setter注释" class="headerlink" title="添加getter、setter注释"></a>添加getter、setter注释</h4><ul>
+<li><p>在需要添加getter和setter的源文件中：<code>ctrl+enter</code>弹出菜单选择<code>getter</code>，然后在弹出对话框中添加一个getter模板（复制default模板的内容），新增如下内容：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* Getter method for property &lt;tt&gt;$&#123;field.name&#125;&lt;/tt&gt;.</span><br><span class="line">*</span><br><span class="line">* @return property value of $&#123;field.name&#125;</span><br><span class="line">*/</span><br><span class="line">public ##</span><br><span class="line">#if($field.modifierStatic)</span><br><span class="line">  static ##</span><br><span class="line">#end</span><br><span class="line">$field.type ##</span><br><span class="line">#set($name = $StringUtil.capitalizeWithJavaBeanConvention($StringUtil.sanitizeJavaIdentifier($helper.getPropertyName($field, $project))))</span><br><span class="line">#if ($field.boolean &amp;&amp; $field.primitive)</span><br><span class="line">  #if ($StringUtil.startsWithIgnoreCase($name, &apos;is&apos;))</span><br><span class="line">    #set($name = $StringUtil.decapitalize($name))</span><br><span class="line">  #else</span><br><span class="line">    is##</span><br><span class="line">#end</span><br><span class="line">#else</span><br><span class="line">  get##</span><br><span class="line">#end</span><br><span class="line">$&#123;name&#125;() &#123;</span><br><span class="line">  return $field.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增一个setter模板，方法同getter，添加内容如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* Setter method for property &lt;tt&gt;$&#123;field.name&#125;&lt;/tt&gt;.</span><br><span class="line">*</span><br><span class="line">* @param $&#123;field.name&#125; value to be assigned to property $&#123;field.name&#125;</span><br><span class="line">*/</span><br><span class="line">#set($paramName = $helper.getParamName($field, $project))</span><br><span class="line">public ##</span><br><span class="line">#if($field.modifierStatic)</span><br><span class="line">  static ##</span><br><span class="line">#end</span><br><span class="line">void set$StringUtil.capitalizeWithJavaBeanConvention($StringUtil.sanitizeJavaIdentifier($helper.getPropertyName($field, $project)))($field.type $paramName) &#123;</span><br><span class="line">  #if ($field.name == $paramName)</span><br><span class="line">    #if (!$field.modifierStatic)</span><br><span class="line">      this.##</span><br><span class="line">    #else</span><br><span class="line">      $classname.##</span><br><span class="line">    #end</span><br><span class="line">  #end</span><br><span class="line">  $field.name = $paramName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="自动生成serialVersionUID"><a href="#自动生成serialVersionUID" class="headerlink" title="自动生成serialVersionUID"></a>自动生成serialVersionUID</h4><ul>
+<li><p>启用该项检查功能<br>  Setting-&gt;Inspections-&gt;Serialization issues-&gt;Serializable class without ’serialVersionUID’</p>
+</li>
+<li><p>在class定义处按 <code>alt+enter</code> 即可自动生成</p>
+</li>
+</ul>
+<p>在Tab中标识出修改过的文件</p>
+<ul>
+<li>setting -&gt; Editor -&gt; editor Tabs -&gt; Mark Modified Tabs…</li>
+</ul>
+<h2 id="Mac-配置Java1-6开发环境"><a href="#Mac-配置Java1-6开发环境" class="headerlink" title="Mac 配置Java1.6开发环境"></a>Mac 配置Java1.6开发环境</h2><h4 id="JDK1-6"><a href="#JDK1-6" class="headerlink" title="JDK1.6"></a>JDK1.6</h4><p>由于Oracl官方提供mac版本jdk是从1.7开始的，而在项目中需要使用jdk1.6，因此需要通过apple官方提供的jdk进行安装。</p>
+<ul>
+<li>apple官方jdk1.6下载并安装<a href="https://support.apple.com/kb/DL1572?locale=zh_CN" target="_blank" rel="external">地址</a>。</li>
+<li>设置JAVA_HOME环境变量，Mac中通过<code>/usr/libexec/java_home</code>命令能够进行java_home的管理，<br>如果添加参数<code>-v 1.6</code> 可以得到jdk1.6的路径，默认输出1.8版本的jdk路径（如果有安装）。</li>
+<li><p>验证JDK安装：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$java -version</span><br><span class="line">java version &quot;1.6.0_65&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.6.0_65-b14-466.1-11M4716)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 20.65-b04-466.1, mixed mode)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h4><p>想要在mac安装maven版本2.2.1，可以通过brew安装此版本，<code>brew install homebrew/versions/maven2</code></p>
+<ul>
+<li><p>验证Maven安装：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$mvn -version</span><br><span class="line">Apache Maven 2.2.1 (r801777; 2009-08-07 03:16:01+0800)</span><br><span class="line">Java version: 1.6.0_65</span><br><span class="line">Java home: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home</span><br><span class="line">Default locale: zh_CN, platform encoding: EUC_CN</span><br><span class="line">OS name: &quot;mac os x&quot; version: &quot;10.10.3&quot; arch: &quot;x86_64&quot; Family: &quot;mac&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="配置淘宝ruby镜像"><a href="#配置淘宝ruby镜像" class="headerlink" title="配置淘宝ruby镜像"></a>配置淘宝ruby镜像</h2><p><a href="http://ruby.taobao.org/" target="_blank" rel="external">http://ruby.taobao.org/</a></p>
+<h2 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h2><ul>
+<li>git config –global push.default simple</li>
+<li>git config –global alias.st status</li>
+<li>git config –global alias.co checkout</li>
+<li>git config –global user.name “xxx”</li>
+<li>git config –global user.email “xxx”</li>
+<li>git config –global core.editor /usr/bin/vim <code>解决通过vi提交时报错：error: There was a problem with the editor &#39;vi&#39;.</code><br>  参见：<a href="http://blog.csdn.net/forever_crying/article/details/8641545" target="_blank" rel="external">http://blog.csdn.net/forever_crying/article/details/8641545</a></li>
+</ul>
+<h2 id="iTerm2配置自动ssh登录服务器免输密码"><a href="#iTerm2配置自动ssh登录服务器免输密码" class="headerlink" title="iTerm2配置自动ssh登录服务器免输密码"></a>iTerm2配置自动ssh登录服务器免输密码</h2><p>通常是使用ssh登录服务器的时候是需要密码的，但是作为懒人的我们的是不喜欢总是输入密码，之前使用securitCRT的时候是可以保存密码的，但是转成iTerm2之后没有保存密码的功能了，这样需要使用脚本来实现了，一段expect脚本如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line"></span><br><span class="line"># args check</span><br><span class="line">if &#123;$argc != 3&#125; &#123;</span><br><span class="line">    puts &quot;-------------------------------------&quot;</span><br><span class="line">    puts &quot;Usage:&quot;</span><br><span class="line">    puts &quot;    auto input password when ssh host&quot;</span><br><span class="line">    puts &quot;    sshexpect.sh user host pwd&quot;</span><br><span class="line">    puts &quot;-------------------------------------&quot;</span><br><span class="line">    exit 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh [lindex $argv 0]@[lindex $argv 1]</span><br><span class="line">expect &#123;</span><br><span class="line">    &quot;(yes/no)?&quot;</span><br><span class="line">    &#123;send &quot;yes\n&quot;;exp_continue&#125;</span><br><span class="line">    &quot;password:&quot;</span><br><span class="line">    &#123;send &quot;[lindex $argv 2]\n&quot;&#125;</span><br><span class="line">&#125;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<p>将该段脚本放置在<code>/usr/local/bin/</code>目录下之后，就可以使用命令<code>login.sh username hostname pwd</code>的方式来登录了。</p>
+<p><strong>当然如果是经常登录同一台服务器的话，可以直接使用ssh 公钥的方式实现啦。</strong></p>
+<p>还有一种情况就是登录服务器的时候密码是通过token校验的，每次登录时token都是不相同的，那这样就只能输入密码了，而不能使用上面的自动登录脚本，但是如果需要开多个终端tab来登录同一个服务器的话，作为懒人的我们的当然是不愿意输入多次密码的啦。这就需要类似securitCRT中复制会话的功能啦，要实现这个功能只需要创建<code>~/.ssh/config</code>文件<a href="http://linux.die.net/man/5/ssh_config" target="_blank" rel="external">参考链接</a>，并在文件中作如下配置即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">host *</span><br><span class="line">ControlMaster auto</span><br><span class="line">ControlPath ~/.ssh/master-%r@%h:%p</span><br></pre></td></tr></table></figure></p>
+<p>这样配置以后，只要是登录同样hostname的服务器，就可以自动copy当前建立的soket而不需要再次输入密码了。如果这样配置，再加上使用前面的自动登录脚本，会出现卡住的情况，原因很简单，前面的自动登录脚本是等待终端输出类似password字样，然后输入密码，配置了<code>~/.ssh/config</code>之后，是直接复制会话登录，就不会出现再次需要输入密码的情况了，所以导致卡住，这种情况可以不配置<code>host *</code>而配置成<code>host hostname</code>的形式，指定特定的机器复制会话，而其他的机器使用原来的登录脚本。</p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/03/07/hexo-setup/" class="prev">上一篇</a><a href="/2015/07/25/tornado-setup/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'arloz';
+var disqus_identifier = '2015/09/08/mac-config/';
+var disqus_title = 'Mac开发环境配置';
+var disqus_url = 'http://arloz.github.io/2015/09/08/mac-config/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//arloz.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2016 <a href="http://arloz.github.io">Arloz</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?a36e15d9e2adec9a21fcdd9f686b1ed2";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
