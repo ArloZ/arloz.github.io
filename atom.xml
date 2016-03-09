@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://arloz.github.io/"/>
-  <updated>2016-03-08T14:57:01.000Z</updated>
+  <updated>2016-03-09T03:58:49.000Z</updated>
   <id>http://arloz.github.io/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>velocity模板渲染之变量替换</title>
+    <link href="http://arloz.github.io/2016/03/09/verlocity-render/"/>
+    <id>http://arloz.github.io/2016/03/09/verlocity-render/</id>
+    <published>2016-03-09T03:53:49.000Z</published>
+    <updated>2016-03-09T03:58:49.000Z</updated>
+    
+    <content type="html">&lt;p&gt;velocity是在&lt;code&gt;spring mvc&lt;/code&gt;中，使用十分普遍的一种模板渲染引擎，&lt;/p&gt;
+&lt;h3 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;VelocityView配置&lt;code&gt;allowSessionOverride&lt;/code&gt;和&lt;code&gt;allowRequestOverride&lt;/code&gt;均为默认的false，即不把session和request中的属性同model中数据做合并。&lt;/li&gt;
+&lt;li&gt;在Controller中往session和modelMap中分别设置属性&lt;code&gt;addAttribute&lt;/code&gt;，使用相同的key，vm模板中的key对应的变量最终渲染得到的值是session中的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;demo&quot;&gt;&lt;a href=&quot;#demo&quot; class=&quot;headerlink&quot; title=&quot;demo&quot;&gt;&lt;/a&gt;demo&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Controller&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;VelocityRenderController&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; String TOKEN         = &lt;span class=&quot;string&quot;&gt;&quot;_token&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; String TOKEN_NEW     = &lt;span class=&quot;string&quot;&gt;&quot;token-new&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; String TOKEN_OLD     = &lt;span class=&quot;string&quot;&gt;&quot;token-old&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@RequestMapping&lt;/span&gt;(value = &lt;span class=&quot;string&quot;&gt;&quot;/velocity&quot;&lt;/span&gt;, method = RequestMethod.GET)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;doGet&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(HttpServletRequest request, ModelMap modelMap)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        HttpSession session = request.getSession();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        session.setAttribute(TOKEN, TOKEN_OLD);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        modelMap.addAttribute(TOKEN, TOKEN_NEW);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        modelMap.addAttribute(&lt;span class=&quot;string&quot;&gt;&quot;hello&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;world2&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;原因分析&quot;&gt;&lt;a href=&quot;#原因分析&quot; class=&quot;headerlink&quot; title=&quot;原因分析&quot;&gt;&lt;/a&gt;原因分析&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Spring请求处理&lt;/p&gt;
+&lt;p&gt;  当一个http请求到达服务端后，通过&lt;code&gt;org.springframework.web.servlet.DispatcherServlet&lt;/code&gt;对请求进行分发处理，在调用handler处理一次请求之后得到结果ModelAndView&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Velocity模板渲染&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当&lt;code&gt;controller&lt;/code&gt;处理完一个请求之后，使用&lt;code&gt;org.springframework.web.servlet.DispatcherServlet#processDispatchResult&lt;/code&gt;对结果进行处理&lt;/li&gt;
+&lt;li&gt;如果没有错误则调用&lt;code&gt;org.springframework.web.servlet.DispatcherServlet#render&lt;/code&gt;方法进行模板渲染，最终的渲染逻辑是从ModelAndView中获取View对象并使用其render方法&lt;code&gt;org.springframework.web.servlet.View#render&lt;/code&gt;进行渲染&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在渲染时首先通过&lt;code&gt;com.alipay.web.mvc.view.velocity.DefaultVelocityLayoutView#createVelocityContext&lt;/code&gt;方法创建&lt;code&gt;velocity&lt;/code&gt;的上下文，如下图：&lt;br&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1457495819616.png&quot; width=&quot;624&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;new VelocityContext&lt;/code&gt;的时候将modelMap中的数据存储到了context中，但是创建ChainedContext时,给context属性传入了空的数据，而将VelocityContext对象赋值给了innerContext属性，如下图：&lt;br&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1457495842082.png&quot; width=&quot;626&quot;&gt;&lt;/p&gt;
+&lt;p&gt;至此，构造了velocity渲染的上下文对象，即当前对象context属性中没有model数据，而model数据存放在innerContext的属性中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;到模板进行渲染的时候，针对vm模板中的变量，通过&lt;code&gt;org.apache.velocity.runtime.parser.node.ASTReference#getVariableValue&lt;/code&gt;方法获取变量的值,如下图：&lt;br&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1457495862871.png&quot; width=&quot;629&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最关键的地方来了&lt;br&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1457495883658.png&quot; width=&quot;627&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1457495920117.png&quot; width=&quot;596&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;getVariableValue&lt;/code&gt;方法中，context属性是我们上面构造的&lt;code&gt;ChainedContext&lt;/code&gt;类型的对象，首先使用了&lt;code&gt;internalGet&lt;/code&gt;方法从当前对象的context属性来获取key对应的value，此时由于当前对象是ChainedContext，且在创建的时候context属性为空，所以通过key获取的value也是为空，这样就需要从request和session中去获取key对应的值，此时如果从session中获得了value，那么就不会从innerContext对象中去获取值了，还记得我们前面在构造VelocityContext时把model中的属性值设置到了innerContext中了。因此，VM模板中的变量渲染的值就是session中设置的值了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;velocity是在&lt;code&gt;spring mvc&lt;/code&gt;中，使用十分普遍的一种模板渲染引擎，&lt;/p&gt;
+&lt;h3 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Veloc
+    
+    </summary>
+    
+      <category term="spring" scheme="http://arloz.github.io/categories/spring/"/>
+    
+    
+      <category term="velocity spring" scheme="http://arloz.github.io/tags/velocity-spring/"/>
+    
+  </entry>
   
   <entry>
     <title>使用 Hexo 轻松搭建博客</title>
