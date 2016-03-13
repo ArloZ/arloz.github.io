@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://arloz.github.io/"/>
-  <updated>2016-03-09T03:58:49.000Z</updated>
+  <updated>2016-03-13T06:56:52.000Z</updated>
   <id>http://arloz.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://arloz.github.io/2016/03/09/verlocity-render/"/>
     <id>http://arloz.github.io/2016/03/09/verlocity-render/</id>
     <published>2016-03-09T03:53:49.000Z</published>
-    <updated>2016-03-09T03:58:49.000Z</updated>
+    <updated>2016-03-13T06:56:52.000Z</updated>
     
-    <content type="html">&lt;p&gt;velocity是在&lt;code&gt;spring mvc&lt;/code&gt;中，使用十分普遍的一种模板渲染引擎，&lt;/p&gt;
+    <content type="html">&lt;p&gt;velocity是在&lt;code&gt;spring mvc&lt;/code&gt;中，使用十分普遍的一种模板渲染引擎，&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;VelocityView配置&lt;code&gt;allowSessionOverride&lt;/code&gt;和&lt;code&gt;allowRequestOverride&lt;/code&gt;均为默认的false，即不把session和request中的属性同model中数据做合并。&lt;/li&gt;
 &lt;li&gt;在Controller中往session和modelMap中分别设置属性&lt;code&gt;addAttribute&lt;/code&gt;，使用相同的key，vm模板中的key对应的变量最终渲染得到的值是session中的值&lt;/li&gt;
@@ -52,16 +52,16 @@
     
     <summary type="html">
     
-      &lt;p&gt;velocity是在&lt;code&gt;spring mvc&lt;/code&gt;中，使用十分普遍的一种模板渲染引擎，&lt;/p&gt;
-&lt;h3 id=&quot;现象&quot;&gt;&lt;a href=&quot;#现象&quot; class=&quot;headerlink&quot; title=&quot;现象&quot;&gt;&lt;/a&gt;现象&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Veloc
+      &lt;p&gt;velocity是在&lt;code&gt;spring mvc&lt;/code&gt;中，使用十分普遍的一种模板渲染引擎，&lt;br&gt;
     
     </summary>
     
       <category term="spring" scheme="http://arloz.github.io/categories/spring/"/>
     
     
-      <category term="velocity spring" scheme="http://arloz.github.io/tags/velocity-spring/"/>
+      <category term="velocity" scheme="http://arloz.github.io/tags/velocity/"/>
+    
+      <category term="spring" scheme="http://arloz.github.io/tags/spring/"/>
     
   </entry>
   
@@ -70,7 +70,7 @@
     <link href="http://arloz.github.io/2016/03/07/hexo-setup/"/>
     <id>http://arloz.github.io/2016/03/07/hexo-setup/</id>
     <published>2016-03-07T15:23:34.000Z</published>
-    <updated>2016-03-08T14:57:01.000Z</updated>
+    <updated>2016-03-13T06:45:02.000Z</updated>
     
     <content type="html">&lt;p&gt;一直希望能够用MarkDown方便的写博客，工具用得爽了，写起来心情也会更好。&lt;/p&gt;
 &lt;p&gt;之前使用&lt;code&gt;jekyll&lt;/code&gt;搭建静态博客并在github上托管，但是由于使用&lt;code&gt;jekyll&lt;/code&gt;的配置比较多且杂，而且对MarkDown的支持其实并不是很好，对代码块需要使用特有的标签，因此尝试使用&lt;code&gt;Hexo&lt;/code&gt;。&lt;/p&gt;
@@ -120,7 +120,11 @@
       <category term="杂七杂八" scheme="http://arloz.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="config blog tool" scheme="http://arloz.github.io/tags/config-blog-tool/"/>
+      <category term="config" scheme="http://arloz.github.io/tags/config/"/>
+    
+      <category term="blog" scheme="http://arloz.github.io/tags/blog/"/>
+    
+      <category term="tool" scheme="http://arloz.github.io/tags/tool/"/>
     
   </entry>
   
@@ -129,7 +133,7 @@
     <link href="http://arloz.github.io/2015/09/08/mac-config/"/>
     <id>http://arloz.github.io/2015/09/08/mac-config/</id>
     <published>2015-09-08T14:40:19.000Z</published>
-    <updated>2016-03-08T16:47:53.000Z</updated>
+    <updated>2016-03-13T06:43:43.000Z</updated>
     
     <content type="html">&lt;p&gt;主要用于记录一些MAC上的个人的开发环境及工具的配置，留着以后备用,避免每次都去google.&lt;/p&gt;
 &lt;h3 id=&quot;编辑器-Sublime-Text-3&quot;&gt;&lt;a href=&quot;#编辑器-Sublime-Text-3&quot; class=&quot;headerlink&quot; title=&quot;编辑器-Sublime Text 3&quot;&gt;&lt;/a&gt;编辑器-Sublime Text 3&lt;/h3&gt;&lt;h4 id=&quot;个人的一些默认配置&quot;&gt;&lt;a href=&quot;#个人的一些默认配置&quot; class=&quot;headerlink&quot; title=&quot;个人的一些默认配置&quot;&gt;&lt;/a&gt;个人的一些默认配置&lt;/h4&gt;&lt;ul&gt;
@@ -242,10 +246,12 @@
     
     </summary>
     
-      <category term="config" scheme="http://arloz.github.io/categories/config/"/>
+      <category term="杂七杂八" scheme="http://arloz.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="config mac" scheme="http://arloz.github.io/tags/config-mac/"/>
+      <category term="config" scheme="http://arloz.github.io/tags/config/"/>
+    
+      <category term="mac" scheme="http://arloz.github.io/tags/mac/"/>
     
   </entry>
   
@@ -254,7 +260,7 @@
     <link href="http://arloz.github.io/2015/07/25/tornado-setup/"/>
     <id>http://arloz.github.io/2015/07/25/tornado-setup/</id>
     <published>2015-07-25T03:01:30.000Z</published>
-    <updated>2016-03-08T16:45:40.000Z</updated>
+    <updated>2016-03-13T06:44:30.000Z</updated>
     
     <content type="html">&lt;p&gt;由于需要在本地搭建一个轻量级的web服务，用来提供一些Web页面小工具，最近工作一直使用java，但是又不想落下Python，所以选择Tornado来进行这个小工具页面的服务的开发，至少保持不对Python生疏。下面进入正题，StepByStep的搭建一个Tornado服务，详情参见&lt;a href=&quot;http://www.tornadoweb.org/en/stable/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
 &lt;h3 id=&quot;下载安装最新版本的Tornado&quot;&gt;&lt;a href=&quot;#下载安装最新版本的Tornado&quot; class=&quot;headerlink&quot; title=&quot;下载安装最新版本的Tornado&quot;&gt;&lt;/a&gt;下载安装最新版本的Tornado&lt;/h3&gt;&lt;ul&gt;
@@ -305,7 +311,7 @@
     
     </summary>
     
-      <category term="install&configure" scheme="http://arloz.github.io/categories/install-configure/"/>
+      <category term="tornado" scheme="http://arloz.github.io/categories/tornado/"/>
     
     
       <category term="tornado" scheme="http://arloz.github.io/tags/tornado/"/>
@@ -317,7 +323,7 @@
     <link href="http://arloz.github.io/2015/01/10/init-use-digitalOcean/"/>
     <id>http://arloz.github.io/2015/01/10/init-use-digitalOcean/</id>
     <published>2015-01-10T11:23:45.000Z</published>
-    <updated>2016-03-08T16:37:04.000Z</updated>
+    <updated>2016-03-13T06:43:24.000Z</updated>
     
     <content type="html">&lt;p&gt;要自己搭建独立的VPN服务实现翻墙，首先需要有能够访问国外VPS，然后在VPS中安装VPN软件即可。&lt;br&gt;目前国外VPS比较好用的主要有Linode和DigitalOcean，其中DigitalOcean的性价比相对更高，&lt;br&gt;本文以DigitalOcean为例进行介绍。&lt;a href=&quot;https://www.digitalocean.com/?refcode=d127d9afd5f3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DigitalOcean注册&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;1、注册DigitalOcean并创建VPS&quot;&gt;&lt;a href=&quot;#1、注册DigitalOcean并创建VPS&quot; class=&quot;headerlink&quot; title=&quot;1、注册DigitalOcean并创建VPS&quot;&gt;&lt;/a&gt;1、注册DigitalOcean并创建VPS&lt;/h3&gt;&lt;p&gt;进入官网&lt;a href=&quot;https://www.digitalocean.com/?refcode=d127d9afd5f3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DigitalOcean&lt;/a&gt;后注册账户，邮件激活后需要填写信用卡信息或通过Paypal充值5刀，完成此步骤后很有可能发生账户被锁的情况，此时只需根据提示填写相关信息后等待处理。&lt;/p&gt;
@@ -369,10 +375,16 @@
     
     </summary>
     
-      <category term="install&configure" scheme="http://arloz.github.io/categories/install-configure/"/>
+      <category term="杂七杂八" scheme="http://arloz.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="DigitalOcean VPN VPS PPTPD" scheme="http://arloz.github.io/tags/DigitalOcean-VPN-VPS-PPTPD/"/>
+      <category term="DigitalOcean" scheme="http://arloz.github.io/tags/DigitalOcean/"/>
+    
+      <category term="VPN" scheme="http://arloz.github.io/tags/VPN/"/>
+    
+      <category term="VPS" scheme="http://arloz.github.io/tags/VPS/"/>
+    
+      <category term="PPTPD" scheme="http://arloz.github.io/tags/PPTPD/"/>
     
   </entry>
   
@@ -381,7 +393,7 @@
     <link href="http://arloz.github.io/2014/09/18/sort-alg/"/>
     <id>http://arloz.github.io/2014/09/18/sort-alg/</id>
     <published>2014-09-18T10:29:23.000Z</published>
-    <updated>2016-03-08T16:31:27.000Z</updated>
+    <updated>2016-03-13T06:44:00.000Z</updated>
     
     <content type="html">&lt;p&gt;排序对于处理很多问题都可以提供一些便利，在日常生活中也常常进行排序（城市排名、大学排名、个人财富排名）等等。&lt;br&gt;对于排序算法，更是学习编程肯定会遇到的一种问题，常见的排序算法有：插入排序、冒泡排序、归并排序、堆排序、&lt;br&gt;希尔排序、快速排序等等等，十分丰富和强大。&lt;/p&gt;
 &lt;h3 id=&quot;插入排序&quot;&gt;&lt;a href=&quot;#插入排序&quot; class=&quot;headerlink&quot; title=&quot;插入排序&quot;&gt;&lt;/a&gt;插入排序&lt;/h3&gt;&lt;p&gt;插入排序首先比较数组的前两个元素data[0]和data[1]，如有必要则进行交换，然后再取data[2]从0位置元素开始比较，找到其合适的位置，&lt;br&gt;此时将该位置及其后的元素都向后移动，把data[2]插入到位置，这就是插入排序名字的由来。其整个排序过程如图示：&lt;br&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1457454286644.png&quot; width=&quot;704&quot;&gt;&lt;br&gt;如图示，原始数组如a所示，首先取数组的前两个元素1，4，正好是升序，不用交换位置(行b)，然后取第三个元素5，将从头开始与已有的前两个元素依次比较，&lt;br&gt;均大于他们，则5放置在第三个位置（如行c），然后取第四个元素2，从头依次比较，其大于1，小于4，则将其插入到4所在的位置，在插入之前，&lt;br&gt;需要将4、5两个元素分别向后移动一个位置（如行d），然后再取第五个元素7，从头依次比较，均大于前面的元素，则放置在第五个位置（如行e），&lt;br&gt;再取第六个元素3，从头依次比较后，放置在第三个位置，在插入之前，需要将后面的元素均向后移动一个位置（如行f），再取第七个元素6，从头依次比较，&lt;br&gt;发现其大于5小于7，则将7向后移动一个位置，将6插入在此位置（如行g），至此排序完成。该排序算法的伪代码如下：&lt;/p&gt;
@@ -432,7 +444,9 @@
       <category term="数据结构与算法" scheme="http://arloz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="sort C++" scheme="http://arloz.github.io/tags/sort-C/"/>
+      <category term="C++" scheme="http://arloz.github.io/tags/C/"/>
+    
+      <category term="sort" scheme="http://arloz.github.io/tags/sort/"/>
     
   </entry>
   
@@ -441,7 +455,7 @@
     <link href="http://arloz.github.io/2014/09/14/linklist/"/>
     <id>http://arloz.github.io/2014/09/14/linklist/</id>
     <published>2014-09-14T14:46:18.000Z</published>
-    <updated>2016-03-08T16:22:05.000Z</updated>
+    <updated>2016-03-13T06:43:34.000Z</updated>
     
     <content type="html">&lt;p&gt;在程序设计中，有几种特别基础而且应用十分广泛的数据结构：链表、栈、队列，&lt;br&gt;从数据结构的逻辑结构的角度讲，他们都属于线性结构，相对于其他的集合结构、树形结构、&lt;br&gt;图结构等，线性结构是十分直观和易于理解的。&lt;/p&gt;
 &lt;h3 id=&quot;链表&quot;&gt;&lt;a href=&quot;#链表&quot; class=&quot;headerlink&quot; title=&quot;链表&quot;&gt;&lt;/a&gt;链表&lt;/h3&gt;&lt;p&gt;数组是程序设计语言提供的一种非常有用的数据结构，但是它有一些限制：1、在编译时需要知道其大小；&lt;br&gt;2、数组是在内存中顺序存储的，这就意味着当插入一个元素的时候需要移动其他的数据元素。对于这两种情况，&lt;br&gt;使用链表来代替数据就是非常有用的。&lt;/p&gt;
@@ -468,7 +482,9 @@
       <category term="数据结构与算法" scheme="http://arloz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="Data-Structures C++" scheme="http://arloz.github.io/tags/Data-Structures-C/"/>
+      <category term="C++" scheme="http://arloz.github.io/tags/C/"/>
+    
+      <category term="Data-Structures" scheme="http://arloz.github.io/tags/Data-Structures/"/>
     
   </entry>
   
@@ -477,7 +493,7 @@
     <link href="http://arloz.github.io/2014/09/09/cpp-orient/"/>
     <id>http://arloz.github.io/2014/09/09/cpp-orient/</id>
     <published>2014-09-09T02:18:32.000Z</published>
-    <updated>2016-03-08T15:19:39.000Z</updated>
+    <updated>2016-03-13T06:42:22.000Z</updated>
     
     <content type="html">&lt;p&gt;面向对象程序设计（OOP）以对象的概念为中心，对象封装了数据和对数据的操作，对象之间通过消息来相互通信，&lt;br&gt;基于对象的结构化程序能够达到几个目的：&lt;/p&gt;
 &lt;ul&gt;
@@ -528,7 +544,9 @@
       <category term="数据结构与算法" scheme="http://arloz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="C++ OOP" scheme="http://arloz.github.io/tags/C-OOP/"/>
+      <category term="C++" scheme="http://arloz.github.io/tags/C/"/>
+    
+      <category term="OOP" scheme="http://arloz.github.io/tags/OOP/"/>
     
   </entry>
   
@@ -537,7 +555,7 @@
     <link href="http://arloz.github.io/2014/06/27/upload-file-tornado/"/>
     <id>http://arloz.github.io/2014/06/27/upload-file-tornado/</id>
     <published>2014-06-27T09:04:36.000Z</published>
-    <updated>2016-03-08T15:12:05.000Z</updated>
+    <updated>2016-03-13T06:44:40.000Z</updated>
     
     <content type="html">&lt;p&gt;由于tornado通过表达上传的数据最大限制在100M，所以如果需要上传视屏文件的情况在需要通过其他方式实现，&lt;br&gt;此处采用nginx的&lt;a href=&quot;http://www.grid.net.ru/nginx/upload.en.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nginx-upload-module&lt;/a&gt;和&lt;a href=&quot;https://github.com/blueimp/jQuery-File-Upload&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;jQuery-File-Upload&lt;/a&gt;实现。&lt;/p&gt;
 &lt;h3 id=&quot;1-编译安装nginx-upload-module&quot;&gt;&lt;a href=&quot;#1-编译安装nginx-upload-module&quot; class=&quot;headerlink&quot; title=&quot;1.编译安装nginx-upload-module&quot;&gt;&lt;/a&gt;1.编译安装nginx-upload-module&lt;/h3&gt;&lt;ul&gt;
@@ -562,7 +580,11 @@
       <category term="tornado" scheme="http://arloz.github.io/categories/tornado/"/>
     
     
-      <category term="tornado upload-file jquery" scheme="http://arloz.github.io/tags/tornado-upload-file-jquery/"/>
+      <category term="tornado" scheme="http://arloz.github.io/tags/tornado/"/>
+    
+      <category term="upload-file" scheme="http://arloz.github.io/tags/upload-file/"/>
+    
+      <category term="jquery" scheme="http://arloz.github.io/tags/jquery/"/>
     
   </entry>
   
@@ -571,7 +593,7 @@
     <link href="http://arloz.github.io/2014/05/16/deploy-http-git/"/>
     <id>http://arloz.github.io/2014/05/16/deploy-http-git/</id>
     <published>2014-05-16T09:21:53.000Z</published>
-    <updated>2016-03-08T15:08:20.000Z</updated>
+    <updated>2016-03-13T06:43:00.000Z</updated>
     
     <content type="html">&lt;p&gt;最近使用git的频率不断增加，需要与人共享git工程，如果使用原生的git协议进行访问的话不是特别方便，因此着手通过部署HTTP服务来实现git的管理，一些配置如下介绍。&lt;/p&gt;
 &lt;h3 id=&quot;1-系统环境&quot;&gt;&lt;a href=&quot;#1-系统环境&quot; class=&quot;headerlink&quot; title=&quot;1.系统环境&quot;&gt;&lt;/a&gt;1.系统环境&lt;/h3&gt;&lt;ul&gt;
@@ -594,10 +616,14 @@
     
     </summary>
     
-      <category term="install&configure" scheme="http://arloz.github.io/categories/install-configure/"/>
+      <category term="杂七杂八" scheme="http://arloz.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="git apache nginx" scheme="http://arloz.github.io/tags/git-apache-nginx/"/>
+      <category term="git" scheme="http://arloz.github.io/tags/git/"/>
+    
+      <category term="apache" scheme="http://arloz.github.io/tags/apache/"/>
+    
+      <category term="nginx" scheme="http://arloz.github.io/tags/nginx/"/>
     
   </entry>
   
@@ -606,7 +632,7 @@
     <link href="http://arloz.github.io/2014/05/11/markdown-desc/"/>
     <id>http://arloz.github.io/2014/05/11/markdown-desc/</id>
     <published>2014-05-11T09:21:53.000Z</published>
-    <updated>2016-03-08T15:03:55.000Z</updated>
+    <updated>2016-03-13T06:45:08.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;http://zh.wikipedia.org/zh-cn/Markdown&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;markdown&lt;/a&gt;作为一种轻量级的标记语言，十分的易读易写。正苦于没有足够简单的文档编辑工具，经朋友的简介也开始用之。&lt;/p&gt;
 &lt;p&gt;下面就对其标记语法做一下简单的记录。&lt;/p&gt;
@@ -654,7 +680,9 @@
       <category term="杂七杂八" scheme="http://arloz.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
     
-      <category term="Markdown markup git" scheme="http://arloz.github.io/tags/Markdown-markup-git/"/>
+      <category term="git" scheme="http://arloz.github.io/tags/git/"/>
+    
+      <category term="Markdown" scheme="http://arloz.github.io/tags/Markdown/"/>
     
   </entry>
   
