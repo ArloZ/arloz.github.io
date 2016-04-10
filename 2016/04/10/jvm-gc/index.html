@@ -108,7 +108,10 @@
 <li>初始标记</li>
 <li>并发标记</li>
 <li>重新标记</li>
-<li>并发清除<br>其中初始标记和重新标记都遵循<code>Stop The world</code>原则。<br>它的优点是并发收集、低停顿，但是也存在比较明显的缺点：</li>
+<li>并发清除</li>
+</ul>
+<p>其中初始标记和重新标记都遵循<code>Stop The world</code>原则。<br>它的优点是并发收集、低停顿，但是也存在比较明显的缺点：</p>
+<ul>
 <li>CMS收集器对CPU资源和敏感，并发阶段会占用CPU资源导致用户线程的响应时间变长。</li>
 <li>CMS收集器无法处理浮动垃圾<code>Floating Garbage</code>，可能出现<code>Concurrent Mode Failure</code>失败，而导致使用备用的Serial Old方案再次进行GC，这样GC耗时就大大增加了。出现<code>Concurrent Mode Failure</code>失败的原因是CMS在进行垃圾回收的时候由于用户线程还在继续运行，那么需要预留一部分空间，当预留的空间不能满足用户线程运行时内存分配时则会出现该失败。</li>
 <li>CMS收集器是基于<code>标记-清除算法</code>的，这样在进行一次GC后会有内存碎片，当碎片过多时将会对大对象的内存分配造成困难。提供了参数可以设定在进行GC之后进行一次内存整理，或者在进行多次GC后进行一次内存整理。</li>
