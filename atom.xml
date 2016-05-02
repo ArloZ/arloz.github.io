@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://arloz.github.io/"/>
-  <updated>2016-05-02T11:51:38.000Z</updated>
+  <updated>2016-05-02T11:55:31.000Z</updated>
   <id>http://arloz.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>jvm-compile</title>
+    <title>Java虚拟机--编译与优化</title>
     <link href="http://arloz.github.io/2016/05/01/jvm-compile/"/>
     <id>http://arloz.github.io/2016/05/01/jvm-compile/</id>
     <published>2016-05-01T02:32:20.000Z</published>
-    <updated>2016-05-02T11:51:38.000Z</updated>
+    <updated>2016-05-02T11:55:31.000Z</updated>
     
     <content type="html">&lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下程序编译与代码优化和高效并发。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -100,11 +100,11 @@
   </entry>
   
   <entry>
-    <title>jvm-exe-code</title>
+    <title>Java虚拟机---字节码执行</title>
     <link href="http://arloz.github.io/2016/04/21/jvm-exe-code/"/>
     <id>http://arloz.github.io/2016/04/21/jvm-exe-code/</id>
     <published>2016-04-20T16:04:52.000Z</published>
-    <updated>2016-05-02T11:53:17.000Z</updated>
+    <updated>2016-05-02T11:55:45.000Z</updated>
     
     <content type="html">&lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下JVM虚拟机的字节码执行。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
