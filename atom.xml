@@ -100,6 +100,60 @@
   </entry>
   
   <entry>
+    <title>jvm-exe-code</title>
+    <link href="http://arloz.github.io/2016/04/21/jvm-exe-code/"/>
+    <id>http://arloz.github.io/2016/04/21/jvm-exe-code/</id>
+    <published>2016-04-20T16:04:52.000Z</published>
+    <updated>2016-05-02T11:53:17.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下JVM虚拟机的字节码执行。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;运行时栈帧结构&quot;&gt;&lt;a href=&quot;#运行时栈帧结构&quot; class=&quot;headerlink&quot; title=&quot;运行时栈帧结构&quot;&gt;&lt;/a&gt;运行时栈帧结构&lt;/h1&gt;&lt;p&gt;栈帧：用于支持虚拟机方法调用和方法执行的数据结构，是虚拟机栈的栈元素。每个方法的调用到执行完成的过程对应了一个栈帧的入栈道出栈的过程。&lt;/p&gt;
+&lt;p&gt;每一个栈帧都包括了一下的数据结构&lt;/p&gt;
+&lt;h3 id=&quot;局部变量表&quot;&gt;&lt;a href=&quot;#局部变量表&quot; class=&quot;headerlink&quot; title=&quot;局部变量表&quot;&gt;&lt;/a&gt;局部变量表&lt;/h3&gt;&lt;p&gt;一组变量值存储空间，用于存放方法参数和方法内部的局部变量。在编译为Class文件的时候，Code属性中的max_locals就决定了该方法所需最大局部变量表的容量&lt;/p&gt;
+&lt;p&gt;在类加载的准备阶段，虚拟机会对类变量进行一次赋初始值，在类实例初始化阶段会再使用构造函数对类变量进行初始化，但是局部变量在类加载过程中是不会进行初始化的，因此局部变量定义后没有赋值是不能使用的。&lt;/p&gt;
+&lt;h3 id=&quot;操作数栈&quot;&gt;&lt;a href=&quot;#操作数栈&quot; class=&quot;headerlink&quot; title=&quot;操作数栈&quot;&gt;&lt;/a&gt;操作数栈&lt;/h3&gt;&lt;p&gt;操作数栈也称操作栈，其最大深度在编译时已经确定，通过Code属性中的max_stacks变量指定。&lt;/p&gt;
+&lt;p&gt;当一个方法刚开始执行的时候，操作数栈是空的，执行过程会根据字节码指令对操作数栈进行入栈和出栈操作，方法调用通过操作数栈来进行参数的传递。&lt;/p&gt;
+&lt;h3 id=&quot;动态连接&quot;&gt;&lt;a href=&quot;#动态连接&quot; class=&quot;headerlink&quot; title=&quot;动态连接&quot;&gt;&lt;/a&gt;动态连接&lt;/h3&gt;&lt;h3 id=&quot;方法返回地址&quot;&gt;&lt;a href=&quot;#方法返回地址&quot; class=&quot;headerlink&quot; title=&quot;方法返回地址&quot;&gt;&lt;/a&gt;方法返回地址&lt;/h3&gt;&lt;p&gt;一个方法被执行后退出方式通常有两种：遇到退出指令后的正常退出和遇到异常且在本方法体内没有完成异常处理。正常退出通常可以通过调用者的PC计数器的值作为返回地址，而异常退出需要通过异常处理器表来决定放回地址。&lt;/p&gt;
+&lt;h3 id=&quot;附加信息&quot;&gt;&lt;a href=&quot;#附加信息&quot; class=&quot;headerlink&quot; title=&quot;附加信息&quot;&gt;&lt;/a&gt;附加信息&lt;/h3&gt;&lt;p&gt;通常由具体的虚拟机实现来确定附件信息：如调试信息等&lt;/p&gt;
+&lt;h1 id=&quot;方法调用&quot;&gt;&lt;a href=&quot;#方法调用&quot; class=&quot;headerlink&quot; title=&quot;方法调用&quot;&gt;&lt;/a&gt;方法调用&lt;/h1&gt;&lt;p&gt;方法调用不等同于方法的执行，Class文件在编译时并不包含链接操作，方法调用在Class文件中都是符号引用，没有直接的方法入口的内存地址。&lt;/p&gt;
+&lt;h3 id=&quot;解析&quot;&gt;&lt;a href=&quot;#解析&quot; class=&quot;headerlink&quot; title=&quot;解析&quot;&gt;&lt;/a&gt;解析&lt;/h3&gt;&lt;p&gt;Class文件编译后对方法的调用都是符号引用，但是对于在编译期可以唯一确定的方法（静态方法和私有方法等）将会将其转变为直接引用，这类方法的调用称为解析。&lt;/p&gt;
+&lt;p&gt;java虚拟机提供了4条方法调用指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;invokestatic&lt;/li&gt;
+&lt;li&gt;invokespecial&lt;/li&gt;
+&lt;li&gt;invokevirtual&lt;/li&gt;
+&lt;li&gt;invokeinterface&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中&lt;code&gt;invokestatic&lt;/code&gt;和&lt;code&gt;invokespecial&lt;/code&gt;指令调用的方法都可以在编译器确定下来，可以在解析阶段确定这些方法的调用版本。&lt;/p&gt;
+&lt;h3 id=&quot;分派&quot;&gt;&lt;a href=&quot;#分派&quot; class=&quot;headerlink&quot; title=&quot;分派&quot;&gt;&lt;/a&gt;分派&lt;/h3&gt;&lt;p&gt;静态类型：实例变量定义时指定的类型，实际类型：实例变量实际的类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;静态分派（方法重载）&lt;/li&gt;
+&lt;li&gt;动态分派（方法重写）&lt;/li&gt;
+&lt;li&gt;单分派和多分派：静态多分派、动态单分派（JDK1.6时）&lt;/li&gt;
+&lt;li&gt;虚拟机动态分派的实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;基于栈的字节码解释执行引擎&quot;&gt;&lt;a href=&quot;#基于栈的字节码解释执行引擎&quot; class=&quot;headerlink&quot; title=&quot;基于栈的字节码解释执行引擎&quot;&gt;&lt;/a&gt;基于栈的字节码解释执行引擎&lt;/h1&gt;&lt;h3 id=&quot;解释执行&quot;&gt;&lt;a href=&quot;#解释执行&quot; class=&quot;headerlink&quot; title=&quot;解释执行&quot;&gt;&lt;/a&gt;解释执行&lt;/h3&gt;&lt;p&gt;现代虚拟机均是&lt;code&gt;解释执行&lt;/code&gt;和&lt;code&gt;编译执行&lt;/code&gt;混合，Java虚拟机通过运行时的编译执行来优化指令的执行效率。&lt;/p&gt;
+&lt;h3 id=&quot;基于栈的指令集合基于寄存器的指令级&quot;&gt;&lt;a href=&quot;#基于栈的指令集合基于寄存器的指令级&quot; class=&quot;headerlink&quot; title=&quot;基于栈的指令集合基于寄存器的指令级&quot;&gt;&lt;/a&gt;基于栈的指令集合基于寄存器的指令级&lt;/h3&gt;&lt;h3 id=&quot;基于栈的解释器执行过程&quot;&gt;&lt;a href=&quot;#基于栈的解释器执行过程&quot; class=&quot;headerlink&quot; title=&quot;基于栈的解释器执行过程&quot;&gt;&lt;/a&gt;基于栈的解释器执行过程&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下JVM虚拟机的字节码执行。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="java" scheme="http://arloz.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://arloz.github.io/tags/java/"/>
+    
+      <category term="jvm" scheme="http://arloz.github.io/tags/jvm/"/>
+    
+      <category term="class" scheme="http://arloz.github.io/tags/class/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java虚拟机--执行系统</title>
     <link href="http://arloz.github.io/2016/04/10/jvm-rt/"/>
     <id>http://arloz.github.io/2016/04/10/jvm-rt/</id>

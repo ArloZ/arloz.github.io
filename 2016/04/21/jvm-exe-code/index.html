@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en_US"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> jvm-exe-code · Arloz Blog</title><meta name="description" content="jvm-exe-code - Arloz"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" type="text/css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/Arloz" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">jvm-exe-code</h1><div class="post-time">Apr 21, 2016</div><div class="post-content"><p>最近在阅读&lt;深入理解Java虚拟机-Java高级特性与最佳实践&gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下JVM虚拟机的字节码执行。</p>
+<a id="more"></a>
+<h1 id="运行时栈帧结构"><a href="#运行时栈帧结构" class="headerlink" title="运行时栈帧结构"></a>运行时栈帧结构</h1><p>栈帧：用于支持虚拟机方法调用和方法执行的数据结构，是虚拟机栈的栈元素。每个方法的调用到执行完成的过程对应了一个栈帧的入栈道出栈的过程。</p>
+<p>每一个栈帧都包括了一下的数据结构</p>
+<h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3><p>一组变量值存储空间，用于存放方法参数和方法内部的局部变量。在编译为Class文件的时候，Code属性中的max_locals就决定了该方法所需最大局部变量表的容量</p>
+<p>在类加载的准备阶段，虚拟机会对类变量进行一次赋初始值，在类实例初始化阶段会再使用构造函数对类变量进行初始化，但是局部变量在类加载过程中是不会进行初始化的，因此局部变量定义后没有赋值是不能使用的。</p>
+<h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3><p>操作数栈也称操作栈，其最大深度在编译时已经确定，通过Code属性中的max_stacks变量指定。</p>
+<p>当一个方法刚开始执行的时候，操作数栈是空的，执行过程会根据字节码指令对操作数栈进行入栈和出栈操作，方法调用通过操作数栈来进行参数的传递。</p>
+<h3 id="动态连接"><a href="#动态连接" class="headerlink" title="动态连接"></a>动态连接</h3><h3 id="方法返回地址"><a href="#方法返回地址" class="headerlink" title="方法返回地址"></a>方法返回地址</h3><p>一个方法被执行后退出方式通常有两种：遇到退出指令后的正常退出和遇到异常且在本方法体内没有完成异常处理。正常退出通常可以通过调用者的PC计数器的值作为返回地址，而异常退出需要通过异常处理器表来决定放回地址。</p>
+<h3 id="附加信息"><a href="#附加信息" class="headerlink" title="附加信息"></a>附加信息</h3><p>通常由具体的虚拟机实现来确定附件信息：如调试信息等</p>
+<h1 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h1><p>方法调用不等同于方法的执行，Class文件在编译时并不包含链接操作，方法调用在Class文件中都是符号引用，没有直接的方法入口的内存地址。</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>Class文件编译后对方法的调用都是符号引用，但是对于在编译期可以唯一确定的方法（静态方法和私有方法等）将会将其转变为直接引用，这类方法的调用称为解析。</p>
+<p>java虚拟机提供了4条方法调用指令：</p>
+<ul>
+<li>invokestatic</li>
+<li>invokespecial</li>
+<li>invokevirtual</li>
+<li>invokeinterface</li>
+</ul>
+<p>其中<code>invokestatic</code>和<code>invokespecial</code>指令调用的方法都可以在编译器确定下来，可以在解析阶段确定这些方法的调用版本。</p>
+<h3 id="分派"><a href="#分派" class="headerlink" title="分派"></a>分派</h3><p>静态类型：实例变量定义时指定的类型，实际类型：实例变量实际的类型</p>
+<ul>
+<li>静态分派（方法重载）</li>
+<li>动态分派（方法重写）</li>
+<li>单分派和多分派：静态多分派、动态单分派（JDK1.6时）</li>
+<li>虚拟机动态分派的实现</li>
+</ul>
+<h1 id="基于栈的字节码解释执行引擎"><a href="#基于栈的字节码解释执行引擎" class="headerlink" title="基于栈的字节码解释执行引擎"></a>基于栈的字节码解释执行引擎</h1><h3 id="解释执行"><a href="#解释执行" class="headerlink" title="解释执行"></a>解释执行</h3><p>现代虚拟机均是<code>解释执行</code>和<code>编译执行</code>混合，Java虚拟机通过运行时的编译执行来优化指令的执行效率。</p>
+<h3 id="基于栈的指令集合基于寄存器的指令级"><a href="#基于栈的指令集合基于寄存器的指令级" class="headerlink" title="基于栈的指令集合基于寄存器的指令级"></a>基于栈的指令集合基于寄存器的指令级</h3><h3 id="基于栈的解释器执行过程"><a href="#基于栈的解释器执行过程" class="headerlink" title="基于栈的解释器执行过程"></a>基于栈的解释器执行过程</h3></div></article></div></section><footer><div class="paginator"><a href="/2016/05/01/jvm-compile/" class="prev">上一篇</a><a href="/2016/04/10/jvm-rt/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'arloz';
+var disqus_identifier = '2016/04/21/jvm-exe-code/';
+var disqus_title = 'jvm-exe-code';
+var disqus_url = 'http://arloz.github.io/2016/04/21/jvm-exe-code/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//arloz.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2016 <a href="http://arloz.github.io">Arloz</a>, unless otherwise noted.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75065017-1",'auto');ga('send','pageview');</script><script src="https://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>

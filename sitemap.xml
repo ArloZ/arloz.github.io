@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://arloz.github.io/2016/04/21/jvm-exe-code/</loc>
+    
+    <lastmod>2016-05-02T11:53:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://arloz.github.io/2016/05/01/jvm-compile/</loc>
     
     <lastmod>2016-05-02T11:51:38.000Z</lastmod>
