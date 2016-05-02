@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://arloz.github.io/"/>
-  <updated>2016-04-10T15:28:19.000Z</updated>
+  <updated>2016-05-02T11:51:38.000Z</updated>
   <id>http://arloz.github.io/</id>
   
   <author>
@@ -16,11 +16,457 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>jvm-compile</title>
+    <link href="http://arloz.github.io/2016/05/01/jvm-compile/"/>
+    <id>http://arloz.github.io/2016/05/01/jvm-compile/</id>
+    <published>2016-05-01T02:32:20.000Z</published>
+    <updated>2016-05-02T11:51:38.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下程序编译与代码优化和高效并发。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;编译期优化&quot;&gt;&lt;a href=&quot;#编译期优化&quot; class=&quot;headerlink&quot; title=&quot;编译期优化&quot;&gt;&lt;/a&gt;编译期优化&lt;/h1&gt;&lt;h3 id=&quot;Javac编译器&quot;&gt;&lt;a href=&quot;#Javac编译器&quot; class=&quot;headerlink&quot; title=&quot;Javac编译器&quot;&gt;&lt;/a&gt;Javac编译器&lt;/h3&gt;&lt;h5 id=&quot;解析与填充符号表&quot;&gt;&lt;a href=&quot;#解析与填充符号表&quot; class=&quot;headerlink&quot; title=&quot;解析与填充符号表&quot;&gt;&lt;/a&gt;解析与填充符号表&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;词法、语法分析&lt;/li&gt;
+&lt;li&gt;填充符号表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;注解处理器&quot;&gt;&lt;a href=&quot;#注解处理器&quot; class=&quot;headerlink&quot; title=&quot;注解处理器&quot;&gt;&lt;/a&gt;注解处理器&lt;/h5&gt;&lt;h5 id=&quot;语义分析和字节码生成&quot;&gt;&lt;a href=&quot;#语义分析和字节码生成&quot; class=&quot;headerlink&quot; title=&quot;语义分析和字节码生成&quot;&gt;&lt;/a&gt;语义分析和字节码生成&lt;/h5&gt;&lt;p&gt;语义分析是在语法分析完成后，对抽象语法树进行正确性分析，如类型转换等是否合法。&lt;/p&gt;
+&lt;h3 id=&quot;Java语法糖&quot;&gt;&lt;a href=&quot;#Java语法糖&quot; class=&quot;headerlink&quot; title=&quot;Java语法糖&quot;&gt;&lt;/a&gt;Java语法糖&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;泛型与类型擦除&lt;/li&gt;
+&lt;li&gt;自动装箱、自动拆箱、遍历循环&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;运行时优化&quot;&gt;&lt;a href=&quot;#运行时优化&quot; class=&quot;headerlink&quot; title=&quot;运行时优化&quot;&gt;&lt;/a&gt;运行时优化&lt;/h1&gt;&lt;h3 id=&quot;HotSpot虚拟机中的JIT编译器&quot;&gt;&lt;a href=&quot;#HotSpot虚拟机中的JIT编译器&quot; class=&quot;headerlink&quot; title=&quot;HotSpot虚拟机中的JIT编译器&quot;&gt;&lt;/a&gt;HotSpot虚拟机中的JIT编译器&lt;/h3&gt;&lt;h5 id=&quot;解释器和编译器&quot;&gt;&lt;a href=&quot;#解释器和编译器&quot; class=&quot;headerlink&quot; title=&quot;解释器和编译器&quot;&gt;&lt;/a&gt;解释器和编译器&lt;/h5&gt;&lt;p&gt;常用的商用虚拟机都采用了解释器+编译器的架构，可以在启动时通过解释器来执行代码，或得更快的启动速度，随着程序的执行，编译器编译为本地机器码的代码越来越多，获得更高的执行效率。在HotSpot虚拟机中，存在两个编译器：Client Compiler、Server Compiler（C1，C2）&lt;/p&gt;
+&lt;h5 id=&quot;编译对象和触发条件&quot;&gt;&lt;a href=&quot;#编译对象和触发条件&quot; class=&quot;headerlink&quot; title=&quot;编译对象和触发条件&quot;&gt;&lt;/a&gt;编译对象和触发条件&lt;/h5&gt;&lt;p&gt;即时编译的对象主要包括：被多次调用的方法、被多次执行的循环体。当方法或循环体的调用次数超过一个阈值之后，将会触发即时编译，再次执行时就直接执行编译后的机器代码。&lt;/p&gt;
+&lt;h5 id=&quot;编译过程&quot;&gt;&lt;a href=&quot;#编译过程&quot; class=&quot;headerlink&quot; title=&quot;编译过程&quot;&gt;&lt;/a&gt;编译过程&lt;/h5&gt;&lt;p&gt;C1、C2编译器的编译过程是不一样的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1462077305601.png&quot; alt=&quot;C1编译过程&quot;&gt;&lt;/p&gt;
+&lt;p&gt;C2编译器将会进行更多的优化操作，已达到更高的执行效率，随之而来的是C2编译器的编译过程耗时更长。&lt;/p&gt;
+&lt;h5 id=&quot;查看和分析即时编译结果&quot;&gt;&lt;a href=&quot;#查看和分析即时编译结果&quot; class=&quot;headerlink&quot; title=&quot;查看和分析即时编译结果&quot;&gt;&lt;/a&gt;查看和分析即时编译结果&lt;/h5&gt;&lt;h3 id=&quot;编译优化技术&quot;&gt;&lt;a href=&quot;#编译优化技术&quot; class=&quot;headerlink&quot; title=&quot;编译优化技术&quot;&gt;&lt;/a&gt;编译优化技术&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;公共子表达式消除&lt;/li&gt;
+&lt;li&gt;数组边界检查消除&lt;/li&gt;
+&lt;li&gt;方法内联&lt;/li&gt;
+&lt;li&gt;逃逸分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;Java与C-C-编译器对比&quot;&gt;&lt;a href=&quot;#Java与C-C-编译器对比&quot; class=&quot;headerlink&quot; title=&quot;Java与C/C++编译器对比&quot;&gt;&lt;/a&gt;Java与C/C++编译器对比&lt;/h1&gt;&lt;h1 id=&quot;Java内存模型与线程&quot;&gt;&lt;a href=&quot;#Java内存模型与线程&quot; class=&quot;headerlink&quot; title=&quot;Java内存模型与线程&quot;&gt;&lt;/a&gt;Java内存模型与线程&lt;/h1&gt;&lt;h3 id=&quot;Java内存模型（JMM）&quot;&gt;&lt;a href=&quot;#Java内存模型（JMM）&quot; class=&quot;headerlink&quot; title=&quot;Java内存模型（JMM）&quot;&gt;&lt;/a&gt;Java内存模型（JMM）&lt;/h3&gt;&lt;p&gt;Java内存模型的主要目标是定义Java中变量的访问规则，模型规定了Java变量都存储在主内存中，每条线程还有自己的工作内存，工作内存中存储了该线程的变量在主内存中的副本，线程对变量的操作都必须是对工作内存的操作，不能直接对主内存进行操作。线程间变量的共享通过主内存实现。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1462109033753.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Java虚拟机的内存模型定义了以下8中内存简单操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;lock&lt;/code&gt;线程锁定一个主内存变量，执行lock操作后将会清空该变量在工作内存的值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;unlock&lt;/code&gt;线程解锁一个主内存变量，执行unlock前必须将工作内存的该变量写回主内存&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;read&lt;/code&gt;从主内存读取到工作内存&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;load&lt;/code&gt;将read操作的变量值放入工作内存的副本中&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;use&lt;/code&gt;从工作内存中获取变量到执行引擎&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;assign&lt;/code&gt;将执行引擎中得到的值赋值到工作内存的变量&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;store&lt;/code&gt;将工作内存的变量传递到主内存&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;write&lt;/code&gt;将store操作的变量存入主内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;volatile变量的特殊访问规则&quot;&gt;&lt;a href=&quot;#volatile变量的特殊访问规则&quot; class=&quot;headerlink&quot; title=&quot;volatile变量的特殊访问规则&quot;&gt;&lt;/a&gt;volatile变量的特殊访问规则&lt;/h5&gt;&lt;p&gt;volatile变量具备两种特性：一是内存模型保证此变量对所有线程的&lt;code&gt;可见性&lt;/code&gt;，即一个线程修改了该变量值，那么所有线程都可见。二是volatile变量禁止指令重排优化，即保证变量的定义与赋值操作之间的指令执行顺序不被重排优化，但是定义前后的指令仍然可以进行重排优化的。&lt;/p&gt;
+&lt;p&gt;内存模型对volatile变量的特殊规则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;use操作必须和load操作同时出现，执行use之前必须进行load，以获取主内存中的最新值，assign操作必须和store操作同时出现，执行assign之后必须进行store，以保证主内存是最新值。&lt;/li&gt;
+&lt;li&gt;对变量的操作指令不可进行重排&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;long和double变量的特殊访问规则&quot;&gt;&lt;a href=&quot;#long和double变量的特殊访问规则&quot; class=&quot;headerlink&quot; title=&quot;long和double变量的特殊访问规则&quot;&gt;&lt;/a&gt;long和double变量的特殊访问规则&lt;/h5&gt;&lt;p&gt;非原子性协定：虚拟机规范允许对long和double这两个64位的变量操作：read、load、store、write4个操作不保证原子性，这就有可能导致线程读取到的非volatile修饰的long、double有可能只有半个变量。但是目前商用的虚拟机都把long、double变量的操作实现为原子操作。&lt;/p&gt;
+&lt;h5 id=&quot;原子性、可见性、有序性&quot;&gt;&lt;a href=&quot;#原子性、可见性、有序性&quot; class=&quot;headerlink&quot; title=&quot;原子性、可见性、有序性&quot;&gt;&lt;/a&gt;原子性、可见性、有序性&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;原子性：java中对变量的6个操作read、load、use、assign、store、write都保证了原子性（long、double变量的非原子协议），lock和unlock两个指令可以用来实现操作的原子性。代码中的synchronized语句块可以实现操作的原子性&lt;/li&gt;
+&lt;li&gt;可见性：一个线程修改了共享变量的值之后，其他线程能够立即知道这个修改。&lt;/li&gt;
+&lt;li&gt;有序性：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;先行发生原则&quot;&gt;&lt;a href=&quot;#先行发生原则&quot; class=&quot;headerlink&quot; title=&quot;先行发生原则&quot;&gt;&lt;/a&gt;先行发生原则&lt;/h5&gt;&lt;p&gt;操作A先行发生于操作B，那么操作A的影响可以被操作B观察到，包括共享内存变量值、消息、方法调用。&lt;/p&gt;
+&lt;h3 id=&quot;java与线程&quot;&gt;&lt;a href=&quot;#java与线程&quot; class=&quot;headerlink&quot; title=&quot;java与线程&quot;&gt;&lt;/a&gt;java与线程&lt;/h3&gt;&lt;h5 id=&quot;线程的实现&quot;&gt;&lt;a href=&quot;#线程的实现&quot; class=&quot;headerlink&quot; title=&quot;线程的实现&quot;&gt;&lt;/a&gt;线程的实现&lt;/h5&gt;&lt;h5 id=&quot;java线程调度&quot;&gt;&lt;a href=&quot;#java线程调度&quot; class=&quot;headerlink&quot; title=&quot;java线程调度&quot;&gt;&lt;/a&gt;java线程调度&lt;/h5&gt;&lt;p&gt;SunJDK的java虚拟机的线程模型采用的一对一线程模型，即将java线程映射为操作系统内核线程（轻量级进程），线程的调用也通过系统调度进行。java线程存在10个优先级，但是不太靠谱，不能与系统的执行优先级对应，有可能被系统调整线程执行的优先级。&lt;/p&gt;
+&lt;h5 id=&quot;状态转换&quot;&gt;&lt;a href=&quot;#状态转换&quot; class=&quot;headerlink&quot; title=&quot;状态转换&quot;&gt;&lt;/a&gt;状态转换&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;新建状态&lt;/li&gt;
+&lt;li&gt;运行状态&lt;/li&gt;
+&lt;li&gt;无限期等待状态&lt;/li&gt;
+&lt;li&gt;限期等待状态&lt;/li&gt;
+&lt;li&gt;阻塞状态&lt;/li&gt;
+&lt;li&gt;结束状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1462185675684.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;线程安全与锁优化&quot;&gt;&lt;a href=&quot;#线程安全与锁优化&quot; class=&quot;headerlink&quot; title=&quot;线程安全与锁优化&quot;&gt;&lt;/a&gt;线程安全与锁优化&lt;/h1&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下程序编译与代码优化和高效并发。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="java" scheme="http://arloz.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://arloz.github.io/tags/java/"/>
+    
+      <category term="optimize" scheme="http://arloz.github.io/tags/optimize/"/>
+    
+      <category term="compile" scheme="http://arloz.github.io/tags/compile/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java虚拟机--执行系统</title>
+    <link href="http://arloz.github.io/2016/04/10/jvm-rt/"/>
+    <id>http://arloz.github.io/2016/04/10/jvm-rt/</id>
+    <published>2016-04-10T15:29:59.000Z</published>
+    <updated>2016-04-20T16:04:05.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下类文件的结构及字节码的执行。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;类文件结构&quot;&gt;&lt;a href=&quot;#类文件结构&quot; class=&quot;headerlink&quot; title=&quot;类文件结构&quot;&gt;&lt;/a&gt;类文件结构&lt;/h1&gt;&lt;p&gt;Java文件通过编译器编译之后生成字节码文件（即class后缀的文件），JVM虚拟就是解析这些字节码文件中的字节码，然后执行对应的指令。JVM通过定义规范的字节码文件的，定义了虚拟机自身的指令集，这样就可以达到&lt;code&gt;Write once Run everywhere&lt;/code&gt;的目的。一个类文件包含以下各项，他们严格的按照顺序定义，这样虚拟机才能正确的解析。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;名称（描述）&lt;/th&gt;
+&lt;th&gt;数量&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;u4&lt;/td&gt;
+&lt;td&gt;magic（魔数，用于唯一确定该文件是否为一个class文件:&lt;code&gt;0xCAFEBABE&lt;/code&gt;）&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;minor_version（次版本号）&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;major_version（主版本号，从45开始，对应版本1.1，向下兼容）&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;constant_pool_count（常量池的大小，从1开始计数，第0项用来表示没有不引用任何常量）&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cp_info&lt;/td&gt;
+&lt;td&gt;constant_pool（常量信息）&lt;/td&gt;
+&lt;td&gt;constant_pool_count-1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;access_flag&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;this_class&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;super_class&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;interface_count&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;interfaces&lt;/td&gt;
+&lt;td&gt;interface_count&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;field_count&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;field_info&lt;/td&gt;
+&lt;td&gt;fields&lt;/td&gt;
+&lt;td&gt;field_count&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;methods_count&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;method_info&lt;/td&gt;
+&lt;td&gt;methods&lt;/td&gt;
+&lt;td&gt;methods_count&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;attributes_count&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;attribute_info&lt;/td&gt;
+&lt;td&gt;attributes&lt;/td&gt;
+&lt;td&gt;attributes_count&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;常量池&quot;&gt;&lt;a href=&quot;#常量池&quot; class=&quot;headerlink&quot; title=&quot;常量池&quot;&gt;&lt;/a&gt;常量池&lt;/h3&gt;&lt;p&gt;常量池中主要存储两大类常量：字面量（通常指代码中定义的文本字符串或final常量）和符号引用。符号引用主要包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;类和接口的全限定名&lt;/li&gt;
+&lt;li&gt;字段的名称和描述符&lt;/li&gt;
+&lt;li&gt;方法的名称和描述符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常量池中的每一项都是一个表，每一项都有一个u1类型的标志位(tag)。如下表&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;标志位（tag）&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Utf8_info&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Utf8编码的字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Integer_info&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;整数型字面量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Float_info&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;浮点型字面量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Long_info&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;长整型字面量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Double_info&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;双精度浮点型字面量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Class_info&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;类或接口的符号引用（全限定名）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_String_info&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;字符串型字面量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Fieldref_info&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;字段的符号引用（名称和描述符）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_Methodref_info&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;类中方法的符号引用（名称和描述符）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_InterfaceMethodref_info&lt;/td&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;接口中方法的符号引用（名称和描述符）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONSTANT_NameAndType_info&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;字段或方法的部分符号引用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;上面的这些常量类型都有自己特定的数据结构：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Utf8_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                  | 数量     |&lt;br&gt;| —- | ——————- | —— |&lt;br&gt;| u1   | 标志位：tag = 1         | 1      |&lt;br&gt;| u2   | 字符串长度：length        | 1      |&lt;br&gt;| u1   | utf8编码字符串字节内容：bytes | length |&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Integer_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                 | 数量   |&lt;br&gt;| —- | —————— | —- |&lt;br&gt;| u1   | 标志位：tag = 3        | 1    |&lt;br&gt;| u4   | 按高位在前存储的int值：bytes | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Float_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                   | 数量   |&lt;br&gt;| —- | ——————– | —- |&lt;br&gt;| u1   | 标志位：tag = 4          | 1    |&lt;br&gt;| u4   | 按高位在前存储的float值：bytes | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Long_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                  | 数量   |&lt;br&gt;| —- | ——————- | —- |&lt;br&gt;| u1   | 标志位：tag = 5         | 1    |&lt;br&gt;| u8   | 按高位在前存储的long值：bytes | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Double_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                    | 数量   |&lt;br&gt;| —- | ——————— | —- |&lt;br&gt;| u1   | 标志位：tag = 6           | 1    |&lt;br&gt;| u8   | 按高位在前存储的double值：bytes | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Class_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                          | 数量   |&lt;br&gt;| —- | ————————— | —- |&lt;br&gt;| u1   | 标志位：tag = 7                 | 1    |&lt;br&gt;| u2   | 类或接口全限定名指向的字符串引用：name_index | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_String_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称               | 数量   |&lt;br&gt;| —- | —————- | —- |&lt;br&gt;| u1   | 标志位：tag = 8      | 1    |&lt;br&gt;| u2   | 指向字符串常量的索引：index | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Fieldref_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                                       | 数量   |&lt;br&gt;| —- | —————————————- | —- |&lt;br&gt;| u1   | 标志位：tag = 9                              | 1    |&lt;br&gt;| u2   | 指向声明该字段的类或接口的描述符CONSTANT_Class_info的索引：index | 1    |&lt;br&gt;| u2   | 指向该字段的描述符CONSTANT_NameAndType_info的索引：index | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_Methodref_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                                       | 数量   |&lt;br&gt;| —- | —————————————- | —- |&lt;br&gt;| u1   | 标志位：tag = 10                             | 1    |&lt;br&gt;| u2   | 指向声明该方法的类的描述符CONSTANT_Class_info的索引：index | 1    |&lt;br&gt;| u2   | 指向该方法的描述符CONSTANT_NameAndType_info的索引：index | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_InterfaceMethodref_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                                       | 数量   |&lt;br&gt;| —- | —————————————- | —- |&lt;br&gt;| u1   | 标志位：tag = 11                             | 1    |&lt;br&gt;| u2   | 指向声明该方法的接口的描述符CONSTANT_Class_info的索引：index | 1    |&lt;br&gt;| u2   | 指向该接口的描述符CONSTANT_NameAndType_info的索引：index | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CONSTANT_NameAndType_info&lt;/p&gt;
+&lt;p&gt;| 类型   | 名称                    | 数量   |&lt;br&gt;| —- | ——————— | —- |&lt;br&gt;| u1   | 标志位：tag = 12          | 1    |&lt;br&gt;| u2   | 指向声明该字段或方法的名称常量：index | 1    |&lt;br&gt;| u2   | 指向该字段的描述符常量项索引：index  | 1    |&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;访问标志&quot;&gt;&lt;a href=&quot;#访问标志&quot; class=&quot;headerlink&quot; title=&quot;访问标志&quot;&gt;&lt;/a&gt;访问标志&lt;/h3&gt;&lt;p&gt;访问标志位于常量池之后，主要用于标识是类还是接口，是否定义为public，是否声明为final等等信息&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1460803332513.png&quot; alt=&quot;access_flag&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;类索引、父类索引和接口集合&quot;&gt;&lt;a href=&quot;#类索引、父类索引和接口集合&quot; class=&quot;headerlink&quot; title=&quot;类索引、父类索引和接口集合&quot;&gt;&lt;/a&gt;类索引、父类索引和接口集合&lt;/h3&gt;&lt;p&gt;class文件通过这三项来决定这个类的继承关系，除了&lt;code&gt;java.lang.Object&lt;/code&gt;类的父类索引为0之外，其他的任何java类的父类都不为0，他们均指向了&lt;code&gt;CONSTANT_Class_info&lt;/code&gt;类型的常量。&lt;/p&gt;
+&lt;h3 id=&quot;字段表集合（field-info）&quot;&gt;&lt;a href=&quot;#字段表集合（field-info）&quot; class=&quot;headerlink&quot; title=&quot;字段表集合（field_info）&quot;&gt;&lt;/a&gt;字段表集合（field_info）&lt;/h3&gt;&lt;p&gt;字段表集合用于描述类或接口中声明的变量，包括了类级别和实例级别的变量，但不包含方法内部申明的变量。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;数量&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;访问标志（类似于类的访问标志）：access_flag&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;字段简单名称索引：name_index&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;字段描述符索引：descriptor_index&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;字段的其他属性个数：attributes_count&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;attribute_info&lt;/td&gt;
+&lt;td&gt;属性信息集合：attributes&lt;/td&gt;
+&lt;td&gt;attributes_count&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;描述符主要用于描述字段的数据类型、方法的参数列表和返回值，描述符标识符的含义：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1460804670400.png&quot; alt=&quot;descriptor&quot;&gt;&lt;/p&gt;
+&lt;p&gt;字段集合中不会列出超类或父接口中继承来的字段。&lt;/p&gt;
+&lt;h3 id=&quot;方法表集合&quot;&gt;&lt;a href=&quot;#方法表集合&quot; class=&quot;headerlink&quot; title=&quot;方法表集合&quot;&gt;&lt;/a&gt;方法表集合&lt;/h3&gt;&lt;p&gt;方法表集合与字段表集合类似，用于描述类中定义的方法，如果没有进行方法重载，方法表集合中不包含父类的方法。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;数量&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;访问标志（类似于类的访问标志）：access_flag&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;方法的简单名称索引：name_index&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;方法描述符索引：descriptor_index&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u2&lt;/td&gt;
+&lt;td&gt;方法的其他属性个数：attributes_count&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;attribute_info&lt;/td&gt;
+&lt;td&gt;属性信息集合：attributes&lt;/td&gt;
+&lt;td&gt;attributes_count&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;属性表集合&quot;&gt;&lt;a href=&quot;#属性表集合&quot; class=&quot;headerlink&quot; title=&quot;属性表集合&quot;&gt;&lt;/a&gt;属性表集合&lt;/h3&gt;&lt;p&gt;属性表用于描述Class文件、字段表、方法表中的专有信息，不要求有严格的顺序。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xrny8.com1.z0.glb.clouddn.com/blog/1460805902136.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对于每个属性，他的名称指向常量池的一个&lt;code&gt;CONSTANT_Utf8_info&lt;/code&gt;类型的常量，属性值的结构可以自定义，只要说明属性值信息的长度即可。&lt;/p&gt;
+&lt;h1 id=&quot;虚拟机类加载机制&quot;&gt;&lt;a href=&quot;#虚拟机类加载机制&quot; class=&quot;headerlink&quot; title=&quot;虚拟机类加载机制&quot;&gt;&lt;/a&gt;虚拟机类加载机制&lt;/h1&gt;&lt;p&gt;java虚拟机类加载机制：虚拟机将Class文件加载到内存，对数据进行校验、转换解析和初始化，最终得到在Java虚拟机中可以直接使用的Java类型。Java类型的加载和链接都是运行前进行的，与语言的编译、链接过程不同，会带来运行期的一些额外性能开销。&lt;/p&gt;
+&lt;p&gt;Java类的生命周期包含：加载、验证、准备、解析、初始化、使用、卸载7个过程。&lt;/p&gt;
+&lt;h3 id=&quot;类的加载时机&quot;&gt;&lt;a href=&quot;#类的加载时机&quot; class=&quot;headerlink&quot; title=&quot;类的加载时机&quot;&gt;&lt;/a&gt;类的加载时机&lt;/h3&gt;&lt;p&gt;Java类在如下时刻需要进行初始化&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;遇到new、getstatic、putstatic、invokestatic 4条指令时，如果类还没有进行初始化，则需要进行初始化。&lt;/li&gt;
+&lt;li&gt;使用reflect反射包对类进行反射调用时，如果没有进行初始化则需要进行初始化。&lt;/li&gt;
+&lt;li&gt;初始化一个类时，如果发现其父类还咩有初始化，则首先触发父类的初始化。&lt;/li&gt;
+&lt;li&gt;虚拟机启动时，用户指定要执行的类（包含main方法的），这个类需要进行初始化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;类的加载过程&quot;&gt;&lt;a href=&quot;#类的加载过程&quot; class=&quot;headerlink&quot; title=&quot;类的加载过程&quot;&gt;&lt;/a&gt;类的加载过程&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;加载&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过类的全限定名找到类对应的二进制流&lt;/li&gt;
+&lt;li&gt;将二进制流转换为方法区的运行时数据结构&lt;/li&gt;
+&lt;li&gt;在堆中生成这个类对应的一个&lt;code&gt;java.lang.Class&lt;/code&gt;对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;验证&lt;/p&gt;
+&lt;p&gt;验证是链接的第一个步骤，主要目的是为了确保类对应的二进制流符合虚拟机的要求，并且不会影响虚拟机自身的安全&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文件格式验证–验证之后字节流将进入方法区存储，后面的阶段基于方法区数据结构来进行&lt;/li&gt;
+&lt;li&gt;元数据验证&lt;/li&gt;
+&lt;li&gt;字节码验证&lt;/li&gt;
+&lt;li&gt;符号引用验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;准备&lt;/p&gt;
+&lt;p&gt;准备阶段正式为类变量(static 变量，不包括实例变量)分配内存，并设置初始值（零值，而不是变量定义时设置的初始值），这些内存都在方法区进行分配&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解析&lt;/p&gt;
+&lt;p&gt;解析阶段是将常量池内的符号引用解析为直接引用的过程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;初始化&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;类加载器&quot;&gt;&lt;a href=&quot;#类加载器&quot; class=&quot;headerlink&quot; title=&quot;类加载器&quot;&gt;&lt;/a&gt;类加载器&lt;/h1&gt;&lt;h3 id=&quot;类与类加载器&quot;&gt;&lt;a href=&quot;#类与类加载器&quot; class=&quot;headerlink&quot; title=&quot;类与类加载器&quot;&gt;&lt;/a&gt;类与类加载器&lt;/h3&gt;&lt;p&gt;通过两个类加载器加载的类，在使用&lt;code&gt;instanceof&lt;/code&gt;关键字的时候认为&lt;code&gt;不相等&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;双亲委派模型&quot;&gt;&lt;a href=&quot;#双亲委派模型&quot; class=&quot;headerlink&quot; title=&quot;双亲委派模型&quot;&gt;&lt;/a&gt;双亲委派模型&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;启动类加载器（Bootstrap ClassLoader）&lt;/li&gt;
+&lt;li&gt;扩展类加载器（Extension ClassLoader）&lt;/li&gt;
+&lt;li&gt;应用程序类加载器（Application ClassLoader）&lt;/li&gt;
+&lt;li&gt;其他用户自定义的类加载器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;双亲委派模型要求每个类都有一个父类的引用，当需要加载一个类时首先使用父类尝试进行加载，如果父类不能加载，则自己进行加载，每一层的类加载器都如此。&lt;/p&gt;
+&lt;h3 id=&quot;破坏双亲委派模型&quot;&gt;&lt;a href=&quot;#破坏双亲委派模型&quot; class=&quot;headerlink&quot; title=&quot;破坏双亲委派模型&quot;&gt;&lt;/a&gt;破坏双亲委派模型&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧，本篇问主要是记录一下类文件的结构及字节码的执行。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="java" scheme="http://arloz.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://arloz.github.io/tags/java/"/>
+    
+      <category term="jvm" scheme="http://arloz.github.io/tags/jvm/"/>
+    
+      <category term="class" scheme="http://arloz.github.io/tags/class/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java虚拟机--内存管理</title>
     <link href="http://arloz.github.io/2016/04/10/jvm-gc/"/>
     <id>http://arloz.github.io/2016/04/10/jvm-gc/</id>
     <published>2016-04-10T15:17:04.000Z</published>
-    <updated>2016-04-10T15:28:19.000Z</updated>
+    <updated>2016-04-12T14:13:09.000Z</updated>
     
     <content type="html">&lt;p&gt;最近在阅读&amp;lt;深入理解Java虚拟机-Java高级特性与最佳实践&amp;gt;一书，对一些概要性的东西做一下记录，也算是一个简单的读书笔记吧。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -164,6 +610,12 @@
     
     </summary>
     
+      <category term="java" scheme="http://arloz.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://arloz.github.io/tags/java/"/>
+    
+      <category term="gc" scheme="http://arloz.github.io/tags/gc/"/>
     
   </entry>
   
@@ -745,7 +1197,7 @@
     <link href="http://arloz.github.io/2014/05/16/deploy-http-git/"/>
     <id>http://arloz.github.io/2014/05/16/deploy-http-git/</id>
     <published>2014-05-16T09:21:53.000Z</published>
-    <updated>2016-03-13T06:43:00.000Z</updated>
+    <updated>2016-04-20T15:31:19.000Z</updated>
     
     <content type="html">&lt;p&gt;最近使用git的频率不断增加，需要与人共享git工程，如果使用原生的git协议进行访问的话不是特别方便，因此着手通过部署HTTP服务来实现git的管理，一些配置如下介绍。&lt;/p&gt;
 &lt;h3 id=&quot;1-系统环境&quot;&gt;&lt;a href=&quot;#1-系统环境&quot; class=&quot;headerlink&quot; title=&quot;1.系统环境&quot;&gt;&lt;/a&gt;1.系统环境&lt;/h3&gt;&lt;ul&gt;
