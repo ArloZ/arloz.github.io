@@ -47,11 +47,11 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://arloz.github.io/2016/05/02/head-first/"/>
-    <id>http://arloz.github.io/2016/05/02/head-first/</id>
-    <published>2016-05-02T14:58:09.000Z</published>
-    <updated>2016-05-29T05:06:29.000Z</updated>
+    <title>Head First设计模式</title>
+    <link href="http://arloz.github.io/2016/07/07/head-first/"/>
+    <id>http://arloz.github.io/2016/07/07/head-first/</id>
+    <published>2016-07-07T15:17:04.000Z</published>
+    <updated>2016-09-02T04:10:12.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Head-First设计模式&quot;&gt;&lt;a href=&quot;#Head-First设计模式&quot; class=&quot;headerlink&quot; title=&quot;Head First设计模式&quot;&gt;&lt;/a&gt;Head First设计模式&lt;/h1&gt;&lt;h3 id=&quot;设计模式&quot;&gt;&lt;a href=&quot;#设计模式&quot; class=&quot;headerlink&quot; title=&quot;设计模式&quot;&gt;&lt;/a&gt;设计模式&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;策略模式：定义算法族，并封装起来，让他们之间可相互替换，让算法的变化独立于使用算法的客户&lt;/li&gt;
@@ -88,6 +88,12 @@
     
     </summary>
     
+      <category term="java" scheme="http://arloz.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://arloz.github.io/tags/java/"/>
+    
+      <category term="设计模式" scheme="http://arloz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
