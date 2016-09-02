@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://arloz.github.io/"/>
-  <updated>2016-05-02T11:55:31.000Z</updated>
+  <updated>2016-07-31T10:35:53.000Z</updated>
   <id>http://arloz.github.io/</id>
   
   <author>
@@ -14,6 +14,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>工欲善其事必先利其器系列</title>
+    <link href="http://arloz.github.io/2016/07/08/tool/"/>
+    <id>http://arloz.github.io/2016/07/08/tool/</id>
+    <published>2016-07-08T15:17:04.000Z</published>
+    <updated>2016-07-31T10:35:53.000Z</updated>
+    
+    <content type="html">&lt;p&gt;工欲善其事必先利其器，本文主要记录在成为程序猿的路上使用的各种犀利工具。&lt;br&gt;持续更新…..&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;随心所欲IDE–IntelliJ-IDEA&quot;&gt;&lt;a href=&quot;#随心所欲IDE–IntelliJ-IDEA&quot; class=&quot;headerlink&quot; title=&quot;随心所欲IDE–IntelliJ IDEA&quot;&gt;&lt;/a&gt;随心所欲IDE–IntelliJ IDEA&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;下载安装请参考官网：&lt;a href=&quot;https://www.jetbrains.com/idea/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.jetbrains.com/idea/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;编辑神器–Sublime-Text&quot;&gt;&lt;a href=&quot;#编辑神器–Sublime-Text&quot; class=&quot;headerlink&quot; title=&quot;编辑神器–Sublime Text&quot;&gt;&lt;/a&gt;编辑神器–Sublime Text&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;下载安装请参考官网：&lt;a href=&quot;https://www.sublimetext.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.sublimetext.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工欲善其事必先利其器，本文主要记录在成为程序猿的路上使用的各种犀利工具。&lt;br&gt;持续更新…..&lt;br&gt;
+    
+    </summary>
+    
+      <category term="tool" scheme="http://arloz.github.io/categories/tool/"/>
+    
+    
+      <category term="tool" scheme="http://arloz.github.io/tags/tool/"/>
+    
+      <category term="工具" scheme="http://arloz.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://arloz.github.io/2016/05/02/head-first/"/>
+    <id>http://arloz.github.io/2016/05/02/head-first/</id>
+    <published>2016-05-02T14:58:09.000Z</published>
+    <updated>2016-05-29T05:06:29.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Head-First设计模式&quot;&gt;&lt;a href=&quot;#Head-First设计模式&quot; class=&quot;headerlink&quot; title=&quot;Head First设计模式&quot;&gt;&lt;/a&gt;Head First设计模式&lt;/h1&gt;&lt;h3 id=&quot;设计模式&quot;&gt;&lt;a href=&quot;#设计模式&quot; class=&quot;headerlink&quot; title=&quot;设计模式&quot;&gt;&lt;/a&gt;设计模式&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;策略模式：定义算法族，并封装起来，让他们之间可相互替换，让算法的变化独立于使用算法的客户&lt;/li&gt;
+&lt;li&gt;观察者模式：定义了对象之间的一对多的依赖，这样当一个对象改变状态时，它的所有依赖都会收到更新通知，可以以报纸的出版者、订阅者比拟。&lt;/li&gt;
+&lt;li&gt;装饰者模式：动态的将责任附加到对象身上，想要扩展功能，装饰者提供有别于继承的另一种选择。&lt;/li&gt;
+&lt;li&gt;工厂方法模式：定义一个创建对象的接口，由子类决定要实例化的类是哪一个，工厂方法让类的实例化推迟到子类。&lt;/li&gt;
+&lt;li&gt;抽象工厂模式：定义一个接口，用于创建相关或依赖对象的家族，而不需要指定具体的类。&lt;/li&gt;
+&lt;li&gt;单件模式：确保一个类只有一个实例，并提供一个全局的访问点&lt;/li&gt;
+&lt;li&gt;命令模式：将请求封装成对象，以便使用不同的请求、队列或日志来参数化其他对象，命令模式也支持可撤销的操作。&lt;/li&gt;
+&lt;li&gt;适配器模式：将一个类的接口转换成客户期望的另一个接口，适配器让原本接口不兼容的类可以合作无间。&lt;/li&gt;
+&lt;li&gt;外观(facade)模式：提供一个统一的接口用来访问子系统中的一堆接口，外观定义了一个高层次的接口，使得子系统更容易使用。&lt;/li&gt;
+&lt;li&gt;模板方法模式：在一个方法中定义一个算法的骨架，而一些步骤延迟到子类中，模板方法使得子类可以在不改变算法结构的情况下重新定义算法的某些步骤。&lt;/li&gt;
+&lt;li&gt;迭代器模式：提供一种方法顺序的访问聚合对象中的每一个元素，而不对外暴露元素在内部的表示&lt;/li&gt;
+&lt;li&gt;组合模式：允许将对象组合成树形结构来表现“整体/部分”层次结构，组合能让客户使用统一的方式来处理对象以及对象组合。&lt;/li&gt;
+&lt;li&gt;状态模式：允许对象在内部状态改变时改变他的行为，对象看起来好像修改了他的类&lt;/li&gt;
+&lt;li&gt;代理模式：为另一个对象提供一个替身或占位符，以控制对这个对象的访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;设计原则&quot;&gt;&lt;a href=&quot;#设计原则&quot; class=&quot;headerlink&quot; title=&quot;设计原则&quot;&gt;&lt;/a&gt;设计原则&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;找出应用中可能变化之处，把他们独立出来，不要和不需要变化的代码混在一起&lt;/li&gt;
+&lt;li&gt;针对接口编程，而不是针对实现&lt;/li&gt;
+&lt;li&gt;多用组合，少用继承&lt;/li&gt;
+&lt;li&gt;为了交互对象之间的松耦合设计而努力&lt;/li&gt;
+&lt;li&gt;类应该对扩展开放，对修改关闭&lt;/li&gt;
+&lt;li&gt;要依赖抽象，不要依赖具体类&lt;/li&gt;
+&lt;li&gt;最少知识原则：之和你的密友谈话&lt;/li&gt;
+&lt;li&gt;好莱坞原则：别调用我们，我们会调用你的&lt;/li&gt;
+&lt;li&gt;单一责任原则：一个类应该只有一个引起这个类变化的原因&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Head-First设计模式&quot;&gt;&lt;a href=&quot;#Head-First设计模式&quot; class=&quot;headerlink&quot; title=&quot;Head First设计模式&quot;&gt;&lt;/a&gt;Head First设计模式&lt;/h1&gt;&lt;h3 id=&quot;设计模式&quot;&gt;&lt;a href=&quot;#设
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Java虚拟机--编译与优化</title>
